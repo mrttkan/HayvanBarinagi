@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using HayvanBarinagi.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly SignInManager<IdentityUser> _signInManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
+        _roleManager = roleManager;
         _signInManager = signInManager;
     }
 
@@ -24,7 +27,7 @@ public class AccountController : Controller
         var user = await _userManager.FindByEmailAsync(email);
         if (user != null)
         {
-      
+
             var checkPassword = await _userManager.CheckPasswordAsync(user, password);
             if (checkPassword)
             {
@@ -49,7 +52,13 @@ public class AccountController : Controller
         var result = await _userManager.CreateAsync(user, password);
         if (result.Succeeded)
         {
+            if (!await _roleManager.RoleExistsAsync("User"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("User"));
+            }
+            await _userManager.AddToRoleAsync(user, "User");
             await _signInManager.SignInAsync(user, false);
+            TempData["SuccessMessage"] = "Başarıyla kayıt oldunuz!";
             return RedirectToAction("Index", "Home");
         }
         foreach (var error in result.Errors)

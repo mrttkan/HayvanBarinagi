@@ -1,8 +1,12 @@
-﻿using HayvanBarinagi.Data;
+﻿
+using HayvanBarinagi.Data;
 using HayvanBarinagi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HayvanBarinagi.Controllers
@@ -10,17 +14,17 @@ namespace HayvanBarinagi.Controllers
 
     public class SahiplendirmeBasvurulariController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HayvanBarinagiIdentityDbContext _context;
 
-        public SahiplendirmeBasvurulariController(ApplicationDbContext context)
+        public SahiplendirmeBasvurulariController(HayvanBarinagiIdentityDbContext context)
         {
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            var basvurular = await _context.SahiplendirmeBasvurulari.Include(b => b.Hayvan).ToListAsync();
-            return View(basvurular);
+            return View(await _context.SahiplendirmeBasvurulari.ToListAsync());
         }
 
         public IActionResult Create(int hayvanId)
@@ -31,20 +35,19 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(SahiplendirmeBasvurulari basvuru)
+        public async Task<IActionResult> Create([Bind("HayvanId,Ad,Soyad,Telefon,Eposta,Adres,Aciklama,Durum,BasvuruTarihi")] SahiplendirmeBasvurulari basvuru)
         {
+            basvuru.BasvuruTarihi = DateTime.Now;
             if (ModelState.IsValid)
             {
-                basvuru.BasvuruTarihi = DateTime.Now;
-                basvuru.Durum = "Beklemede";
 
-                _context.Add(basvuru);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.SahiplendirmeBasvurulari.Add(basvuru);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
             return View(basvuru);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -62,7 +65,8 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, SahiplendirmeBasvurulari basvuru)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,HayvanId,Ad,Soyad,Telefon,Eposta,Adres,Aciklama,Durum,BasvuruTarihi")] SahiplendirmeBasvurulari basvuru)
         {
             if (id != basvuru.Id)
             {
@@ -91,7 +95,7 @@ namespace HayvanBarinagi.Controllers
             }
             return View(basvuru);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -100,7 +104,6 @@ namespace HayvanBarinagi.Controllers
             }
 
             var basvuru = await _context.SahiplendirmeBasvurulari
-                .Include(b => b.Hayvan)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (basvuru == null)
             {
@@ -112,6 +115,7 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var basvuru = await _context.SahiplendirmeBasvurulari.FindAsync(id);

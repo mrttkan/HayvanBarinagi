@@ -1,0 +1,45 @@
+﻿@model List<HayvanBarinagi.Models.SahiplendirmeBasvurulari>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sahiplendirme Başvuruları</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Sahiplendirme Başvuruları</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>BaşvuruID</th>
+                    <th>HayvanID</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Telefon</th>
+                    <th>E-posta</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var basvuru in Model)
+                {
+                    <tr>
+                        <td>@basvuru.Id</td>
+                        <td>@basvuru.HayvanId</td>
+                        <td>@basvuru.Ad</td>
+                        <td>@basvuru.Soyad</td>
+                        <td>@basvuru.Telefon</td>
+                        <td>@basvuru.Eposta</td>
+                        <td>@basvuru.Durum</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@basvuru.Id" class="btn btn-primary btn-sm">Düzenle</a>
+                            <a asp-action="Delete" asp-route-id="@basvuru.Id" class="btn btn-danger btn-sm">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

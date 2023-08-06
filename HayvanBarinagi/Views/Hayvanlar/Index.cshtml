@@ -34,9 +34,9 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.6);
             padding: 1rem;
-            transition: opacity 0.3s;
+            transition: opacity 0.5s;
         }
 
         .animal-card:hover .card-info {
@@ -52,7 +52,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         .animal-card h5.card-title {
@@ -93,6 +93,18 @@
         text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
+    .btn-outline-dark {
+        border-color: black;
+        color: black;
+        font-weight: bold;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: black;
+            color: white;
+        }
+
 </style>
 
 <h1 class="text-center">Barınağımızdaki Dostlarımız</h1>
@@ -107,15 +119,24 @@
                     <h5 class="card-title">@hayvan.Ad</h5>
                     <p class="card-text">@hayvan.Tur</p>
                     <p class="card-text">@hayvan.Aciklama</p>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Create", "Hayvanlar")" class="btn btn-success btn-block">Oluştur</a>
+                        <a href="@Url.Action("Edit", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-warning btn-block">Düzenle</a>
+                        <a href="@Url.Action("Delete", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-danger btn-block">Sil</a>
+                    }
+                    <a href="javascript:void(0);" class="btn btn-outline-dark btn-lg" onclick="basvur(@hayvan.Id)">Sahiplen</a>
 
-                    <a href="@Url.Action("Edit", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-warning btn-block">Düzenle</a>
-                    <a href="@Url.Action("Details", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-info btn-block">Detaylar</a>
-                    <a href="@Url.Action("Delete", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-danger btn-block">Sil</a>
-
-                    <a href="#" class="btn btn-primary btn-block">Başvur</a>
 
                 </div>
             </div>
         </div>
     }
 </div>
+<script>
+    function basvur(hayvanId) {
+        console.log("Hayvan ID: " + hayvanId);
+        window.location.href = '/SahiplendirmeBasvurulari/Create?hayvanId=' + hayvanId;
+    }
+
+</script>

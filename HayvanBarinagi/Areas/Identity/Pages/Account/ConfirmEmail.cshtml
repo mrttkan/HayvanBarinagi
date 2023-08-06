@@ -1,0 +1,35 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "E-posta Onayı";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+    }
+
+    .email-confirm-container {
+        max-width: 600px;
+        margin: 10% auto;
+        padding: 20px 40px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        color: black;
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<div class="email-confirm-container">
+    <h1>@ViewData["Title"]</h1>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+</div>

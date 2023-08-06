@@ -1,0 +1,42 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Erişim Engellendi";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+    }
+
+    header {
+        max-width: 600px;
+        margin: 10% auto;
+        padding: 20px 40px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        color: black;
+    }
+
+    p {
+        font-size: 18px;
+        color: #777;
+        margin-top: 20px;
+    }
+
+    .text-danger {
+        color: #ff0000;
+    }
+</style>
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">Bu kaynağa erişim hakkınız bulunmamaktadır.</p>
+</header>

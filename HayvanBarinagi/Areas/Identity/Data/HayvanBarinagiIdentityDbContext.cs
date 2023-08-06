@@ -1,8 +1,10 @@
+using HayvanBarinagi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using HayvanBarinagi.Data;
 
-namespace HayvanBarinagi.Areas.Identity.Data;
+namespace HayvanBarinagi.Data;
 
 public class HayvanBarinagiIdentityDbContext : IdentityDbContext<IdentityUser>
 {
@@ -10,7 +12,8 @@ public class HayvanBarinagiIdentityDbContext : IdentityDbContext<IdentityUser>
         : base(options)
     {
     }
-
+    public DbSet<Hayvan> Hayvanlar { get; set; }
+    public DbSet<SahiplendirmeBasvurulari> SahiplendirmeBasvurulari { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

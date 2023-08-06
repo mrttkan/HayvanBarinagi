@@ -9,40 +9,33 @@ using HayvanBarinagi.Models;
 using Microsoft.AspNetCore.Authorization;
 using HayvanBarinagi.Data;
 
+
 namespace HayvanBarinagi.Controllers
 {
     public class HayvanlarController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HayvanBarinagiIdentityDbContext _context;
 
-        public HayvanlarController(ApplicationDbContext context)
+        public HayvanlarController(HayvanBarinagiIdentityDbContext context)
         {
             _context = context;
         }
         public async Task<IActionResult> Index()
         {
-            return _context.Hayvanlar != null ?
-                        View(await _context.Hayvanlar.ToListAsync()) :
-                        Problem("'HayvanBarinagiContext.Hayvanlar' değeri boş(null) olamaz .");
+            var hayvanlar = await _context.Hayvanlar.ToListAsync();
+
+            if (User.IsInRole("Admin"))
+            {
+                return View(hayvanlar);
+            }
+            else
+            {
+                return View(hayvanlar.Where(h => !h.Sahiplendirildi));
+            }
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Hayvanlar == null)
-            {
-                return NotFound();
-            }
 
-            var hayvan = await _context.Hayvanlar
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (hayvan == null)
-            {
-                return NotFound();
-            }
-
-            return View(hayvan);
-        }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -50,7 +43,7 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,Tur,Ad,ResimUrl,Aciklama,Sahiplendirildi")] Hayvan hayvan)
         {
             if (ModelState.IsValid)
@@ -64,7 +57,7 @@ namespace HayvanBarinagi.Controllers
             return View(hayvan);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Hayvanlar == null)
@@ -82,7 +75,7 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Tur,Ad,ResimUrl,Aciklama,Sahiplendirildi")] Hayvan hayvan)
         {
             if (id != hayvan.Id)
@@ -114,7 +107,7 @@ namespace HayvanBarinagi.Controllers
             }
             return View(hayvan);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Hayvanlar == null)
@@ -134,7 +127,7 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Hayvanlar == null)

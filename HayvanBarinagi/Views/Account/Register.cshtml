@@ -1,19 +1,79 @@
 ﻿@{
     ViewData["Title"] = "Register";
 }
+<style>
+    .card-header {
+        color: black;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        transition: background-color 0.2s, color 0.2s;
+    }
 
-<h2>Kayıt Ol</h2>
+        .card-header:hover {
+            background-color: black;
+            color: white;
+        }
 
-<form method="post">
-    <div>
-        <label>E-posta:</label>
-        <input type="email" name="email" required />
+    .form-element, .form-label {
+        color: black;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+        .form-element:hover {
+            background-color: black;
+            color: white;
+        }
+
+    .btn-register {
+        border-color: black;
+        color: black;
+        font-weight: bold;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+        .btn-register:hover {
+            background-color: black;
+            color: white;
+        }
+</style>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Kayıt Ol
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">Adınız:</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Soyadınız:</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Telefon:</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-posta:</label>
+                            <input type="email" class="form-control" id="email" name="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Parola:</label>
+                            <input type="password" class="form-control" id="password" name="password" required />
+                        </div>
+                        <div>
+                            <input type="submit" value="Kayıt Ol" class="btn btn-register" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label>Parola:</label>
-        <input type="password" name="password" required />
-    </div>
-    <div>
-        <input type="submit" value="Kayıt Ol" />
-    </div>
-</form>
+</div>

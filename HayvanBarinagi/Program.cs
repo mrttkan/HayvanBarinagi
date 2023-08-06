@@ -1,18 +1,19 @@
 using HayvanBarinagi.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using HayvanBarinagi.Areas.Identity.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<HayvanBarinagiIdentityDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<HayvanBarinagiIdentityDbContext>()
+    .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -25,9 +26,40 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+
+async Task EnsureRolesAndAdminUserCreated(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+{
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        var role = new IdentityRole("Admin");
+        await roleManager.CreateAsync(role);
+    }
+
+    var adminUser = await userManager.FindByEmailAsync("s221210017@sakarya.edu.tr");
+    if (adminUser == null)
+    {
+        var user = new IdentityUser
+        {
+            UserName = "s221210017@sakarya.edu.tr",
+            Email = "s221210017@sakarya.edu.tr"
+        };
+        var createUserResult = await userManager.CreateAsync(user, "123Sau321/");
+        if (createUserResult.Succeeded)
+        {
+            await userManager.AddToRoleAsync(user, "Admin");
+        }
+    }
+}
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using var scope = app.Services.CreateScope();
+var serviceProvider = scope.ServiceProvider;
+
+var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+await EnsureRolesAndAdminUserCreated(roleManager, userManager);
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();

@@ -1,0 +1,54 @@
+﻿@model string
+
+<style>
+    .alert-custom {
+        border-radius: 10px;
+        font-weight: bold;
+        transition: opacity 0.3s;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        margin: 20px 0;
+    }
+
+    .alert-danger {
+        background-color: #ffcccc;
+        border: 2px solid #ff0000;
+        color: black;
+        &:hover
+
+    {
+        background-color: #ffaaaa;
+    }
+
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border: 2px solid #28a745;
+        color: black;
+        &:hover
+
+    {
+        background-color: #c2e6c4;
+    }
+
+    }
+
+    .btn-close {
+        color: black;
+        &:hover
+
+    {
+        color: white;
+    }
+
+    }
+</style>
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+    <div class="alert alert-custom alert-@statusMessageClass alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @Model
+    </div>
+}

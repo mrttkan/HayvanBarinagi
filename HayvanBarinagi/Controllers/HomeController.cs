@@ -1,6 +1,7 @@
 ﻿using HayvanBarinagi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using HayvanBarinagi.Data;
 
 namespace HayvanBarinagi.Controllers
 {

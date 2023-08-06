@@ -1,0 +1,23 @@
+﻿@model HayvanBarinagi.Models.SahiplendirmeBasvurulari
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sahiplendirme Başvurusunu Sil</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Sahiplendirme Başvurusunu Sil</h2>
+
+        <div class="alert alert-danger">
+            <strong>Uyarı:</strong> "@Model.Ad @Model.Soyad" isimli başvuruyu silmek üzeresiniz. Bu işlem geri alınamaz.
+        </div>
+
+        <form asp-action="Delete" asp-controller="SahiplendirmeBasvurulari" method="post">
+            <input asp-for="Id" type="hidden" />
+            <button type="submit" class="btn btn-danger">Silmeyi Onayla</button>
+            <a asp-action="Index" class="btn btn-secondary">İptal</a>
+        </form>
+    </div>
+</body>
+</html>

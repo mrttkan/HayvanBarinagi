@@ -1,55 +1,143 @@
 ﻿@model HayvanBarinagi.Models.Hayvan
 
-@{
-    ViewData["Title"] = "Create";
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        .container {
+            max-width: 900px;
+            margin: auto;
+            text-align: left;
+        }
 
-<h1>Create</h1>
+        .text-background {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 20px;
+            display: inline-block;
+            color: black;
+            font-size: 1.25rem;
+        }
 
-<h4>Hayvan</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Tur" class="control-label"></label>
-                <input asp-for="Tur" class="form-control" />
-                <span asp-validation-for="Tur" class="text-danger"></span>
+        .display-4 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: black;
+        }
+
+        .lead {
+            color: black;
+            font-size: 1.25rem;
+        }
+
+        .btn-outline-dark {
+            border-color: black;
+            color: black;
+            font-weight: bold;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+            .btn-outline-dark:hover {
+                background-color: black;
+                color: white;
+            }
+
+        /* Additional styles for the form */
+        .form-label {
+            font-size: 1.1rem;
+            color: black;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 15px;
+            border: 1px solid black;
+        }
+
+            .form-control:focus {
+                box-shadow: none;
+                border-color: black;
+            }
+
+        .btn-primary {
+            background-color: white;
+            border-color: black;
+            color: black;
+            border-radius: 25px;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+
+            .btn-primary:hover {
+                background-color: black;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="display-4 mb-4">Hayvan Ekle</h1>
+        <div class="text-background mb-4 lead">Eklenecek Hayvanın Bilgilerini giriniz</div>
+
+        <div class="row justify-content-left">
+            <div class="col-md-8">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Tur" class="form-label"></label>
+                        <input asp-for="Tur" class="form-control" />
+                        <span asp-validation-for="Tur" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Ad" class="form-label"></label>
+                        <input asp-for="Ad" class="form-control" />
+                        <span asp-validation-for="Ad" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="ResimUrl" class="form-label"></label>
+                        <input asp-for="ResimUrl" class="form-control" />
+                        <span asp-validation-for="ResimUrl" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Aciklama" class="form-label"></label>
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check mb-3">
+                        <label class="form-label">@Html.DisplayNameFor(model => model.Sahiplendirildi)</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Sahiplendirildi" id="SahiplendirildiTrue" value="true" />
+                                <label class="form-check-label" for="SahiplendirildiTrue">Evet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Sahiplendirildi" id="SahiplendirildiFalse" value="false" />
+                                <label class="form-check-label" for="SahiplendirildiFalse">Hayır</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Hayvan Ekle" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Ad" class="control-label"></label>
-                <input asp-for="Ad" class="form-control" />
-                <span asp-validation-for="Ad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ResimUrl" class="control-label"></label>
-                <input asp-for="ResimUrl" class="form-control" />
-                <span asp-validation-for="ResimUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Aciklama" class="control-label"></label>
-                <input asp-for="Aciklama" class="form-control" />
-                <span asp-validation-for="Aciklama" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Sahiplendirildi" /> @Html.DisplayNameFor(model => model.Sahiplendirildi)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="mt-4">
+            <a asp-action="Index" class="btn btn-primary btn-outline-dark">Geri Dön</a>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-}
+</body>
+</html>

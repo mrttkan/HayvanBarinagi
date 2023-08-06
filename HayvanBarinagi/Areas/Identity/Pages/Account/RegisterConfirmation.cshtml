@@ -1,0 +1,57 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Kayıt Onayı";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+    }
+
+    .auth-container {
+        max-width: 600px;
+        margin: 5% auto;
+        padding: 20px 40px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+
+    h1 {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        color: black;
+    }
+
+    p, a {
+        font-size: 1.1rem;
+        color: black;
+    }
+
+    a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="auth-container">
+    <h1>@ViewData["Title"]</h1>
+    @if (Model.DisplayConfirmAccountLink)
+    {
+        <p>
+            Bu uygulamanın şu anda gerçek bir e-posta göndericiye kayıtlı değil. Gerçek bir e-posta gönderici nasıl yapılandırılacağını öğrenmek için <a href="https://aka.ms/aspaccountconf">bu dokümanlara</a> bakabilirsiniz.
+            Normalde bu e-posta ile gönderilirdi: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Hesabınızı onaylamak için buraya tıklayın</a>
+        </p>
+    }
+    else
+    {
+        <p>
+            Lütfen hesabınızı onaylamak için e-postanızı kontrol edin.
+        </p>
+    }
+</div>
