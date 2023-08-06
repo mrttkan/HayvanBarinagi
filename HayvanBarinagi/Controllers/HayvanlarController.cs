@@ -23,15 +23,7 @@ namespace HayvanBarinagi.Controllers
         public async Task<IActionResult> Index()
         {
             var hayvanlar = await _context.Hayvanlar.ToListAsync();
-
-            if (User.IsInRole("Admin"))
-            {
-                return View(hayvanlar);
-            }
-            else
-            {
-                return View(hayvanlar.Where(h => !h.Sahiplendirildi));
-            }
+            return View(hayvanlar);
         }
 
 
@@ -44,12 +36,10 @@ namespace HayvanBarinagi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Tur,Ad,ResimUrl,Aciklama,Sahiplendirildi")] Hayvan hayvan)
+        public async Task<IActionResult> Create([Bind("Id,Tur,Ad,ResimUrl,Aciklama")] Hayvan hayvan)
         {
             if (ModelState.IsValid)
             {
-                hayvan.Sahiplendirildi = false;
-
                 _context.Add(hayvan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -76,7 +66,7 @@ namespace HayvanBarinagi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Tur,Ad,ResimUrl,Aciklama,Sahiplendirildi")] Hayvan hayvan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Tur,Ad,ResimUrl,Aciklama")] Hayvan hayvan)
         {
             if (id != hayvan.Id)
             {
@@ -87,8 +77,6 @@ namespace HayvanBarinagi.Controllers
             {
                 try
                 {
-                    hayvan.Sahiplendirildi = false;
-
                     _context.Update(hayvan);
                     await _context.SaveChangesAsync();
                 }

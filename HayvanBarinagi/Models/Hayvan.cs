@@ -8,6 +8,5 @@ namespace HayvanBarinagi.Models
         public string Ad { get; set; }
         public string ResimUrl { get; set; }
         public string Aciklama { get; set; }
-        public bool Sahiplendirildi { get; set; }
     }
 }

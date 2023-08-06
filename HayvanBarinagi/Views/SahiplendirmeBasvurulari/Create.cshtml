@@ -4,41 +4,51 @@
 <html>
 <head>
     <title>Yeni Sahiplendirme Başvurusu</title>
+    <style>
+        .box {
+            font-family: 'Arial', sans-serif;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+
+    </style>
 </head>
-<body>
-    <div class="container mt-5">
-        <h2 class="mb-4">Yeni Sahiplendirme Başvurusu</h2>
+<box>
+    <div class="box">
+        <boxbox>Yeni Sahiplendirme Başvurusu</boxbox>
         <form asp-action="Create" method="post">
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="HayvanId" class="form-label">Hayvan ID:</label>
-                <button type="button" class="btn btn-secondary" disabled>@ViewBag.HayvanId</button>
+                <button type="button" class="btn btn-secondary">@ViewBag.HayvanId</button>
             </div>
-            <div>
+            <div class="mb-4">
                 <label for="Ad" class="form-label">Ad:</label>
                 <input asp-for="Ad" class="form-control" id="Ad" required>
                 <span asp-validation-for="Ad" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="Soyad" class="form-label">Soyad:</label>
                 <input asp-for="Soyad" class="form-control" id="Soyad" required>
                 <span asp-validation-for="Soyad" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="Telefon" class="form-label">Telefon Numarası:</label>
                 <input asp-for="Telefon" class="form-control" id="Telefon" required>
                 <span asp-validation-for="Telefon" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="Eposta" class="form-label">E-posta:</label>
                 <input asp-for="Eposta" class="form-control" id="Eposta" required>
                 <span asp-validation-for="Eposta" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="Adres" class="form-label">Adres:</label>
                 <textarea asp-for="Adres" class="form-control" id="Adres" rows="4" required></textarea>
                 <span asp-validation-for="Adres" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="Aciklama" class="form-label">Bu hayvanı neden sahiplenmek istiyorsunuz ve onunla ilgili bakım planlarınız nelerdir?</label>
                 <textarea asp-for="Aciklama" class="form-control" id="Aciklama" rows="6" required></textarea>
                 <span asp-validation-for="Aciklama" class="text-danger"></span>
@@ -47,5 +57,5 @@
             <button type="submit" class="btn btn-primary">Başvuruyu Gönder</button>
         </form>
     </div>
-</body>
+</box>
 </html>

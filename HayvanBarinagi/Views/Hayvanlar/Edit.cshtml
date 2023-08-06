@@ -4,58 +4,87 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<style>
+    .card-header {
+        color: black;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        transition: background-color 0.2s, color 0.2s;
+    }
 
-<h4>Hayvan</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Tur" class="control-label"></label>
-                <input asp-for="Tur" class="form-control" />
-                <span asp-validation-for="Tur" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ad" class="control-label"></label>
-                <input asp-for="Ad" class="form-control" />
-                <span asp-validation-for="Ad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ResimUrl" class="control-label"></label>
-                <input asp-for="ResimUrl" class="form-control" />
-                <span asp-validation-for="ResimUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Aciklama" class="control-label"></label>
-                <input asp-for="Aciklama" class="form-control" />
-                <span asp-validation-for="Aciklama" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">@Html.DisplayNameFor(model => model.Sahiplendirildi)</label>
-                <div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Sahiplendirildi" id="EditSahiplendirildiTrue" value="true" checked="@Model.Sahiplendirildi" />
-                        <label class="form-check-label" for="EditSahiplendirildiTrue">Evet</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Sahiplendirildi" id="EditSahiplendirildiFalse" value="false" checked="@(!Model.Sahiplendirildi)" />
-                        <label class="form-check-label" for="EditSahiplendirildiFalse">Hayır</label>
-                    </div>
+        .card-header:hover {
+            background-color: black;
+            color: white;
+        }
+
+    .form-control, .control-label {
+        color: black;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+        .form-control:hover {
+            background-color: black;
+            color: white;
+        }
+
+    .btn-primary, .btn-back {
+        border-color: black;
+        color: black;
+        font-weight: bold;
+        background-color: white; 
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+        .btn-primary:hover, .btn-back:hover {
+            background-color: black;
+            color: white;
+        }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Seçilen Hayvanı Düzenle
                 </div>
-                <span asp-validation-for="Sahiplendirildi" class="text-danger"></span>
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Tur" class="control-label"></label>
+                            <input asp-for="Tur" class="form-control" />
+                            <span asp-validation-for="Tur" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Ad" class="control-label"></label>
+                            <input asp-for="Ad" class="form-control" />
+                            <span asp-validation-for="Ad" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ResimUrl" class="control-label"></label>
+                            <input asp-for="ResimUrl" class="form-control" />
+                            <span asp-validation-for="ResimUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Aciklama" class="control-label"></label>
+                            <input asp-for="Aciklama" class="form-control" />
+                            <span asp-validation-for="Aciklama" class="text-danger"></span>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Kaydet" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            <div class="mt-3">
+                <a asp-action="Index" class="btn btn-back">Geri Dön</a>
             </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Geri Dön</a>
 </div>
 
 @section Scripts {

@@ -47,6 +47,18 @@
                     Giriş
                 </div>
                 <div class="card-body">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @foreach (var value in ViewData.ModelState.Values)
+                            {
+                                foreach (var error in value.Errors)
+                                {
+                                    <p>@error.ErrorMessage</p>
+                                }
+                            }
+                        </div>
+                    }
                     <form method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">E-posta:</label>

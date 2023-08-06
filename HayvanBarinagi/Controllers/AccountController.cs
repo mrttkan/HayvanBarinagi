@@ -35,7 +35,7 @@ public class AccountController : Controller
                 return RedirectToAction("Index", "Home");
             }
         }
-        ModelState.AddModelError(string.Empty, "Giriş başarısız!");
+        ModelState.AddModelError(string.Empty, "Giriş başarısız! E-posta veya parola hatalı.");
         return View();
     }
 
@@ -48,6 +48,21 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Register(string email, string password)
     {
+      
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            ModelState.AddModelError(string.Empty, "E-posta alanı gereklidir.");
+        }
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            ModelState.AddModelError(string.Empty, "Parola alanı gereklidir.");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+
         var user = new IdentityUser { UserName = email, Email = email };
         var result = await _userManager.CreateAsync(user, password);
         if (result.Succeeded)

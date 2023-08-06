@@ -26,7 +26,7 @@ namespace HayvanBarinagi.Controllers
         {
             return View(await _context.SahiplendirmeBasvurulari.ToListAsync());
         }
-
+        [Authorize(Roles = "Admin,User")]
         public IActionResult Create(int hayvanId)
         {
             ViewBag.HayvanId = hayvanId;
@@ -35,6 +35,7 @@ namespace HayvanBarinagi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Create([Bind("HayvanId,Ad,Soyad,Telefon,Eposta,Adres,Aciklama,Durum,BasvuruTarihi")] SahiplendirmeBasvurulari basvuru)
         {
             basvuru.BasvuruTarihi = DateTime.Now;
