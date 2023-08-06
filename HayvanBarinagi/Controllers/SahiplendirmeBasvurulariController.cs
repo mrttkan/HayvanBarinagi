@@ -1,0 +1,128 @@
+﻿using HayvanBarinagi.Data;
+using HayvanBarinagi.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+
+namespace HayvanBarinagi.Controllers
+{
+
+    public class SahiplendirmeBasvurulariController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+
+        public SahiplendirmeBasvurulariController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var basvurular = await _context.SahiplendirmeBasvurulari.Include(b => b.Hayvan).ToListAsync();
+            return View(basvurular);
+        }
+
+        public IActionResult Create(int hayvanId)
+        {
+            ViewBag.HayvanId = hayvanId;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(SahiplendirmeBasvurulari basvuru)
+        {
+            if (ModelState.IsValid)
+            {
+                basvuru.BasvuruTarihi = DateTime.Now;
+                basvuru.Durum = "Beklemede";
+
+                _context.Add(basvuru);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(basvuru);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var basvuru = await _context.SahiplendirmeBasvurulari.FindAsync(id);
+            if (basvuru == null)
+            {
+                return NotFound();
+            }
+            return View(basvuru);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, SahiplendirmeBasvurulari basvuru)
+        {
+            if (id != basvuru.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(basvuru);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BasvuruExists(basvuru.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(basvuru);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var basvuru = await _context.SahiplendirmeBasvurulari
+                .Include(b => b.Hayvan)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (basvuru == null)
+            {
+                return NotFound();
+            }
+
+            return View(basvuru);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var basvuru = await _context.SahiplendirmeBasvurulari.FindAsync(id);
+            _context.SahiplendirmeBasvurulari.Remove(basvuru);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool BasvuruExists(int id)
+        {
+            return _context.SahiplendirmeBasvurulari.Any(e => e.Id == id);
+        }
+    }
+}
