@@ -47,41 +47,41 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Seçilen Hayvanı Düzenle
+                    @_localization.Getkey("EditSelectedAnimal").Value
                 </div>
                 <div class="card-body">
                     <form asp-action="Edit">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="Id" />
                         <div class="form-group">
-                            <label asp-for="Tur" class="control-label"></label>
+                            <label asp-for="Tur" class="control-label">@_localization.Getkey("Species").Value</label>
                             <input asp-for="Tur" class="form-control" />
                             <span asp-validation-for="Tur" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Ad" class="control-label"></label>
+                            <label asp-for="Ad" class="control-label">@_localization.Getkey("Name").Value</label>
                             <input asp-for="Ad" class="form-control" />
                             <span asp-validation-for="Ad" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="ResimUrl" class="control-label"></label>
+                            <label asp-for="ResimUrl" class="control-label">@_localization.Getkey("ImageUrl").Value</label>
                             <input asp-for="ResimUrl" class="form-control" />
                             <span asp-validation-for="ResimUrl" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Aciklama" class="control-label"></label>
+                            <label asp-for="Aciklama" class="control-label">@_localization.Getkey("Description").Value</label>
                             <input asp-for="Aciklama" class="form-control" />
                             <span asp-validation-for="Aciklama" class="text-danger"></span>
                         </div>
                         <div style="height: 20px;"></div>
                         <div class="form-group">
-                            <input type="submit" value="Kaydet" class="btn btn-primary" />
+                            <input type="submit" value="@_localization.Getkey("Save").Value" class="btn btn-primary" />
                         </div>
                     </form>
                 </div>
             </div>
             <div class="mt-3">
-                <a asp-action="Index" class="btn btn-back">Geri Dön</a>
+                <a asp-action="Index" class="btn btn-back">@_localization.Getkey("GoBack").Value</a>
             </div>
         </div>
     </div>

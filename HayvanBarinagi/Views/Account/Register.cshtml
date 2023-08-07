@@ -44,7 +44,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Kayıt Ol
+                    @_localization.Getkey("SignUp").Value
                 </div>
                 <div class="card-body">
                     @if (ViewData.ModelState.IsValid == false)
@@ -58,27 +58,27 @@
                     }
                     <form method="post">
                         <div class="mb-3">
-                            <label for="firstName" class="form-label">Adınız:</label>
+                            <label for="firstName" class="form-label">@_localization.Getkey("Name").Value:</label>
                             <input type="text" class="form-control" id="firstName" name="firstName" required />
                         </div>
                         <div class="mb-3">
-                            <label for="lastName" class="form-label">Soyadınız:</label>
+                            <label for="lastName" class="form-label">@_localization.Getkey("Surname").Value:</label>
                             <input type="text" class="form-control" id="lastName" name="lastName" required />
                         </div>
                         <div class="mb-3">
-                            <label for="phoneNumber" class="form-label">Telefon:</label>
+                            <label for="phoneNumber" class="form-label">@_localization.Getkey("Phone").Value:</label>
                             <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required />
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-posta:</label>
+                            <label for="email" class="form-label">@_localization.Getkey("Email").Value:</label>
                             <input type="email" class="form-control" id="email" name="email" required />
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Parola:</label>
+                            <label for="password" class="form-label">@_localization.Getkey("Password").Value:</label>
                             <input type="password" class="form-control" id="password" name="password" required />
                         </div>
                         <div>
-                            <input type="submit" value="Kayıt Ol" class="btn btn-register" />
+                            <input type="submit" value="@_localization.Getkey("SignUp").Value" class="btn btn-register" />
                         </div>
                     </form>
                 </div>

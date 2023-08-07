@@ -44,7 +44,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Giriş
+                    @_localization.Getkey("Login").Value
                 </div>
                 <div class="card-body">
                     @if (!ViewData.ModelState.IsValid)
@@ -61,15 +61,15 @@
                     }
                     <form method="post">
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-posta:</label>
+                            <label for="email" class="form-label">@_localization.Getkey("Email").Value:</label>
                             <input type="email" class="form-control form-element" id="email" name="email" required />
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Parola:</label>
+                            <label for="password" class="form-label">@_localization.Getkey("Password").Value:</label>
                             <input type="password" class="form-control form-element" id="password" name="password" required />
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-login">Giriş Yap</button>
+                            <button type="submit" class="btn btn-login">@_localization.Getkey("Login").Value</button>
                         </div>
                     </form>
                 </div>

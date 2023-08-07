@@ -61,9 +61,9 @@
 </head>
 <body>
     <div class="box">
-        <h1>Silmek İstediğinizden Emin Misiniz ?</h1>
+        <h1>@_localization.Getkey("AreYouSureDelete").Value</h1>
         <div>
-            <h4>Silinecek Hayvanın Bilgileri</h4>
+            <h4>@_localization.Getkey("AnimalToDeleteInfo").Value</h4>
             <hr />
             <dl class="row">
                 <dt class="col-sm-2">
@@ -94,8 +94,8 @@
 
             <form asp-action="Delete">
                 <input type="hidden" asp-for="Id" />
-                <input type="submit" value="Sil" class="btn btn-custom btn-delete" />
-                <a asp-action="Index" class="btn btn-custom">Geri Dön</a>
+                <input type="submit" value="@_localization.Getkey("Delete").Value" class="btn btn-custom btn-delete" />
+                <a asp-action="Index" class="btn btn-custom">@_localization.Getkey("GoBack").Value</a>
             </form>
         </div>
     </div>

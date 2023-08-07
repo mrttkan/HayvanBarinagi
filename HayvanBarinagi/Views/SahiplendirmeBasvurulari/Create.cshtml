@@ -17,29 +17,29 @@
 </head>
 <box>
     <div class="box">
-        <boxbox>Yeni Sahiplendirme Başvurusu</boxbox>
+        <boxbox>@_localization.Getkey("NewAdoptionApplication").Value</boxbox>
         <form asp-action="Create" method="post">
             <div class="mb-4">
-                <label for="HayvanId" class="form-label">Hayvan ID:</label>
+                <label for="HayvanId" class="form-label">@_localization.Getkey("AnimalID").Value:</label>
                 <button type="button" class="btn btn-secondary">@ViewBag.HayvanId</button>
             </div>
             <div class="mb-4">
-                <label for="Ad" class="form-label">Ad:</label>
+                <label for="Ad" class="form-label">@_localization.Getkey("Name").Value:</label>
                 <input asp-for="Ad" class="form-control" id="Ad" required>
                 <span asp-validation-for="Ad" class="text-danger"></span>
             </div>
             <div class="mb-4">
-                <label for="Soyad" class="form-label">Soyad:</label>
+                <label for="Soyad" class="form-label">@_localization.Getkey("Surname").Value:</label>
                 <input asp-for="Soyad" class="form-control" id="Soyad" required>
                 <span asp-validation-for="Soyad" class="text-danger"></span>
             </div>
             <div class="mb-4">
-                <label for="Telefon" class="form-label">Telefon Numarası:</label>
+                <label for="Telefon" class="form-label">@_localization.Getkey("Phone").Value:</label>
                 <input asp-for="Telefon" class="form-control" id="Telefon" required>
                 <span asp-validation-for="Telefon" class="text-danger"></span>
             </div>
             <div class="mb-4">
-                <label for="Eposta" class="form-label">E-posta:</label>
+                <label for="Eposta" class="form-label">@_localization.Getkey("Email").Value:</label>
                 <input asp-for="Eposta" class="form-control" id="Eposta" required>
                 <span asp-validation-for="Eposta" class="text-danger"></span>
             </div>
@@ -49,12 +49,12 @@
                 <span asp-validation-for="Adres" class="text-danger"></span>
             </div>
             <div class="mb-4">
-                <label for="Aciklama" class="form-label">Bu hayvanı neden sahiplenmek istiyorsunuz ve onunla ilgili bakım planlarınız nelerdir?</label>
+                <label for="Aciklama" class="form-label">@_localization.Getkey("Explanation").Value</label>
                 <textarea asp-for="Aciklama" class="form-control" id="Aciklama" rows="6" required></textarea>
                 <span asp-validation-for="Aciklama" class="text-danger"></span>
             </div>
             <input asp-for="HayvanId" type="hidden" value="@ViewBag.HayvanId" />
-            <button type="submit" class="btn btn-primary">Başvuruyu Gönder</button>
+            <button type="submit" class="btn btn-primary">@_localization.Getkey("SubmitApplication").Value</button>
         </form>
     </div>
 </box>

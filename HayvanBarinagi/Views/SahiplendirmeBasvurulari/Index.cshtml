@@ -56,16 +56,16 @@
 </head>
 <body>
     <div class="box mt-5">
-        <h2 class="mb-4">Sahiplendirme Başvuruları</h2>
+        <h2 class="mb-4">@_localization.Getkey("ManageApplications") </h2>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>BaşvuruID</th>
-                    <th>HayvanID</th>
-                    <th>Ad</th>
-                    <th>Soyad</th>
-                    <th>Telefon</th>
-                    <th>E-posta</th>
+                    <th>@_localization.Getkey("AnimalID")</th>
+                    <th>@_localization.Getkey("Name")</th>
+                    <th>@_localization.Getkey("Surname")</th>
+                    <th>@_localization.Getkey("Phone")</th>
+                    <th>@_localization.Getkey("Email")</th>
                     <th>Durum</th>
                     <th>İşlemler</th>
                 </tr>
@@ -82,8 +82,8 @@
                         <td>@basvuru.Eposta</td>
                         <td>@basvuru.Durum</td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@basvuru.Id" class="btn btn-primary btn-sm">Düzenle</a>
-                            <a asp-action="Delete" asp-route-id="@basvuru.Id" class="btn btn-danger btn-sm">Sil</a>
+                            <a asp-action="Edit" asp-route-id="@basvuru.Id" class="btn btn-primary btn-sm">@_localization.Getkey("Edit")</a>
+                            <a asp-action="Delete" asp-route-id="@basvuru.Id" class="btn btn-danger btn-sm">@_localization.Getkey("Delete")</a>
                         </td>
                     </tr>
                 }

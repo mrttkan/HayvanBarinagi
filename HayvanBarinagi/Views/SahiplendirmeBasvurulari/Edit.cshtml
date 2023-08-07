@@ -8,47 +8,47 @@
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f7f8fa; /* Hafif gri bir genel arkaplan rengi */
+        background-color: #f7f8fa; 
     }
 
     .container {
-        background-color: white; /* Beyaz bir kapsayıcı arkaplanı */
-        padding: 30px; /* İçeriğin etrafına biraz boşluk ekleyin */
-        border-radius: 15px; /* Hafif yuvarlak köşeler */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif bir gölge efekti */
+        background-color: white; 
+        padding: 30px; 
+        border-radius: 15px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     }
 </style>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4">Sahiplendirme Başvurusu Düzenle</h2>
+        <h2 class="mb-4">@_localization.Getkey("EditAdoptionApplication")</h2>
         <form asp-action="Edit" method="post">
             <input type="hidden" asp-for="Id" />
 
             <div class="mb-3">
-                <label for="HayvanId" class="form-label">Hayvan ID:</label>
+                <label for="HayvanId" class="form-label">@_localization.Getkey("AnimalID").Value:</label>
                 <input asp-for="HayvanId" class="form-control" id="HayvanId" readonly />
             </div>
 
             <div class="mb-3">
-                <label for="Ad" class="form-label">Ad:</label>
+                <label for="Ad" class="form-label">@_localization.Getkey("Name").Value:</label>
                 <input asp-for="Ad" class="form-control" id="Ad" required>
                 <span asp-validation-for="Ad" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label for="Soyad" class="form-label">Soyad:</label>
+                <label for="Soyad" class="form-label">@_localization.Getkey("Surname").Value:</label>
                 <input asp-for="Soyad" class="form-control" id="Soyad" required>
                 <span asp-validation-for="Soyad" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label for="Telefon" class="form-label">Telefon Numarası:</label>
+                <label for="Telefon" class="form-label">@_localization.Getkey("Phone").Value:</label>
                 <input asp-for="Telefon" class="form-control" id="Telefon" required>
                 <span asp-validation-for="Telefon" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label for="Eposta" class="form-label">E-posta:</label>
+                <label for="Eposta" class="form-label">@_localization.Getkey("Email").Value:</label>
                 <input asp-for="Eposta" class="form-control" id="Eposta" required>
                 <span asp-validation-for="Eposta" class="text-danger"></span>
             </div>
@@ -60,27 +60,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="Aciklama" class="form-label">Bu hayvanı neden sahiplenmek istiyorsunuz ve onunla ilgili bakım planlarınız nelerdir?</label>
+                <label for="Aciklama" class="form-label">@_localization.Getkey("Explanation").Value</label>
                 <textarea asp-for="Aciklama" class="form-control" id="Aciklama" rows="6" required></textarea>
                 <span asp-validation-for="Aciklama" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="Durum" class="form-label">Durum:</label>
-                <select asp-for="Durum" class="form-control" id="Durum">
-                    <option value="Bekliyor">Bekliyor</option>
-                    <option value="Onaylandı">Onaylandı</option>
-                    <!-- Diğer durumları buraya ekleyebilirsiniz -->
-                </select>
-                <span asp-validation-for="Durum" class="text-danger"></span>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Düzenlemeyi Kaydet</button>
+            <button type="submit" class="btn btn-primary">@_localization.Getkey("SubmitApplication").Value</button>
         </form>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

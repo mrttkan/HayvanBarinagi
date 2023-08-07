@@ -107,7 +107,7 @@
 
 </style>
 
-<h1 class="text-center">Barınağımızdaki Dostlarımız</h1>
+<h1 class="text-center">@_localization.Getkey("OurShelterFriends").Value</h1>
 
 <div class="row mt-4">
     @foreach (var hayvan in Model)
@@ -121,11 +121,11 @@
                     <p class="card-text">@hayvan.Aciklama</p>
                     @if (User.IsInRole("Admin"))
                     {
-                        <a href="@Url.Action("Create", "Hayvanlar")" class="btn btn-success btn-block">Oluştur</a>
-                        <a href="@Url.Action("Edit", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-warning btn-block">Düzenle</a>
-                        <a href="@Url.Action("Delete", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-danger btn-block">Sil</a>
+                        <a href="@Url.Action("Create", "Hayvanlar")" class="btn btn-success btn-block">@_localization.Getkey("Create").Value</a>
+                        <a href="@Url.Action("Edit", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-warning btn-block">@_localization.Getkey("Edit").Value</a>
+                        <a href="@Url.Action("Delete", "Hayvanlar", new { id = hayvan.Id })" class="btn btn-danger btn-block">@_localization.Getkey("Delete").Value</a>
                     }
-                    <a href="javascript:void(0);" class="btn btn-outline-dark btn-lg" onclick="basvur(@hayvan.Id)">Sahiplen</a>
+                    <a href="javascript:void(0);" class="btn btn-outline-dark btn-lg" onclick="basvur(@hayvan.Id)">@_localization.Getkey("Adopt").Value</a>
 
 
                 </div>

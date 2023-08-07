@@ -86,45 +86,46 @@
 </head>
 <body>
     <div class="box mt-5">
-        <h1 class="display-4 mb-3">Hayvan Ekle</h1>
+        <h1 class="display-4 mb-3">@_localization.Getkey("AddAnimal").Value</h1>
         <div class="row justify-content-left">
             <div class="col-md-8">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                     <div class="form-group mb-3">
-                        <label asp-for="Tur" class="form-label"></label>
+                        <label asp-for="Tur" class="form-label">@_localization.Getkey("Species").Value</label>
                         <input asp-for="Tur" class="form-control" />
                         <span asp-validation-for="Tur" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mb-3">
-                        <label asp-for="Ad" class="form-label"></label>
+                        <label asp-for="Ad" class="form-label">@_localization.Getkey("Name").Value</label>
                         <input asp-for="Ad" class="form-control" />
                         <span asp-validation-for="Ad" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mb-3">
-                        <label asp-for="ResimUrl" class="form-label"></label>
+                        <label asp-for="ResimUrl" class="form-label">@_localization.Getkey("ImageUrl").Value</label>
                         <input asp-for="ResimUrl" class="form-control" />
                         <span asp-validation-for="ResimUrl" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mb-3">
-                        <label asp-for="Aciklama" class="form-label"></label>
+                        <label asp-for="Aciklama" class="form-label">@_localization.Getkey("Description").Value</label>
                         <input asp-for="Aciklama" class="form-control" />
                         <span asp-validation-for="Aciklama" class="text-danger"></span>
                     </div>
 
+
                     <div class="form-group">
-                        <input type="submit" value="Hayvan Ekle" class="btn btn-primary" />
+                        <input type="submit" value="@_localization.Getkey("AddAnimal").Value" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
 
         <div class="mt-4">
-            <a asp-action="Index" class="btn btn-primary btn-outline-dark">Geri Dön</a>
+            <a asp-action="Index" class="btn btn-primary btn-outline-dark">@_localization.Getkey("GoBack").Value</a>
         </div>
     </div>
 
